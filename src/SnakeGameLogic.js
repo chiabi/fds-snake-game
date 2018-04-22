@@ -84,8 +84,10 @@ SnakeGameLogic.prototype.nextState = function() {
     do {
       this.fruit.x = Math.floor(Math.random() * COLS);
       this.fruit.y = Math.floor(Math.random() * ROWS);
-    } while(this.joints.some(j => j.x === this.fruit.x && j.y === this.fruit.y));
-    // FIXME: 새로 생성된 먹이가 newJoint랑 겹치면...?
+    } while(this.joints.some(j => (j.x === this.fruit.x && j.y === this.fruit.y) || 
+    (newJoint.x === this.fruit.x && newJoint.y === this.fruit.y)
+  ));
+  // ~~FIXME: 새로 생성된 먹이가 newJoint랑 겹치면...?~~
   } else {
     this.joints.pop();
   }
