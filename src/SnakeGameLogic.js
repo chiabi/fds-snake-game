@@ -49,7 +49,7 @@ SnakeGameLogic.prototype.nextState = function() {
   console.log(`nextState`);
 
   // 뱀 머리 좌표~
-  let newJoint = {x: this.joints[0].x, y: this.joints[0].y}
+  let newJoint = Object.assign({}, this.joints[0]);
 
   // 뱀 머리 방향에 따른 좌표 계산
   switch(this.direction) {
@@ -85,6 +85,7 @@ SnakeGameLogic.prototype.nextState = function() {
       this.fruit.x = Math.floor(Math.random() * COLS);
       this.fruit.y = Math.floor(Math.random() * ROWS);
     } while(this.joints.some(j => j.x === this.fruit.x && j.y === this.fruit.y));
+    // FIXME: 새로 생성된 먹이가 newJoint랑 겹치면...?
   } else {
     this.joints.pop();
   }
